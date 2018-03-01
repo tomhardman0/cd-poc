@@ -17,19 +17,33 @@
   </head>
   <body>
 
-    <button>click me</button>
+    <button class="one">click me</button>
+    <button class="two">or me</button>
 
     <script>
-      const button = document.querySelector('button');
+      const button1 = document.querySelector('button.one');
       const fieldsObject = {
         'dimension1': 'brand',
         'dimension2': 'username',
         'dimension3': 'environment',
         'dimension4': 'contentType'
       };
-      button.addEventListener('click', (e) => {
+      button1.addEventListener('click', (e) => {
         e.preventDefault();
         ga('send', 'event', 'category', 'action', 'label', 'value', fieldsObject);
+      });
+
+      const button2 = document.querySelector('button.two');
+      const payloadObj = Object.assign(fieldsObject, {
+        'eventCategory': 'category',
+        'eventAction': 'action',
+        'eventLabel': 'label',
+        'eventValue': 'value',
+        'nonInteraction': 'whatever this means'
+      });
+      button2.addEventListener('click', (e) => {
+        e.preventDefault();
+        ga('send', 'event', payloadObj);
       });
     </script>
   </body>
